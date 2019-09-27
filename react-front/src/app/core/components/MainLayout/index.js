@@ -1,4 +1,6 @@
 import React from 'react';
+import enhancers from './enhancers';
+
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,8 +20,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ButtonAppBar({children}) {
+function ButtonAppBar({profile, children, unlock}) {
   const classes = useStyles();
+
+  const { 
+    accountAddress, 
+    isMetamaskInstalled 
+  } = profile;
 
   return (
     <div className={classes.root}>
@@ -28,7 +35,16 @@ export default function ButtonAppBar({children}) {
           <Typography variant="h6" className={classes.title}>
             EtherBet
           </Typography>
-          <Button color="inherit">Login</Button>
+          {
+            isMetamaskInstalled 
+              && !accountAddress 
+                && <Button 
+                    onClick={() => unlock() }
+                    color="inherit">Unlock</Button>
+          }
+          {
+            accountAddress && accountAddress
+          }
         </Toolbar>
       </AppBar>
       <Container maxWidth="md">
@@ -37,3 +53,5 @@ export default function ButtonAppBar({children}) {
     </div>
   );
 }
+
+export default enhancers.redux(ButtonAppBar);

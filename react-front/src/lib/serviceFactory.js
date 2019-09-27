@@ -1,4 +1,5 @@
 import Storage from './storage';
+import Web3 from './web3Factory';
 import services from 'services';
 
 export default class ServiceFactory {
@@ -27,13 +28,14 @@ export default class ServiceFactory {
   static _memoizeAndReturnInstance(service) {
     const ServiceClass = services[service];
     const storage = Storage.getInstance();
+    const web3 = Web3.getInstance();
 
     if (!ServiceClass) {
       throw new Error(`Service "${service}" not found.`);
     }
 
     if (!ServiceFactory[service]) {
-      ServiceFactory[service] = new ServiceClass(storage); 
+      ServiceFactory[service] = new ServiceClass(storage, web3); 
     }
 
     return ServiceFactory[service];
