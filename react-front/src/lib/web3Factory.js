@@ -4,6 +4,7 @@ export default class Web3Factory {
     if (!Web3Factory._instance) {
       if(window.ethereum){
         Web3Factory._instance = new Web3(window.ethereum);
+        window.web3= Web3Factory._instance;
       } else if(window.web3) {
         Web3Factory._instance = new Web3(window.web3.currentProvider);
       } else {
