@@ -1,0 +1,13 @@
+export function* {{camelCase action}}() {
+  try {
+    const result = yield call(
+      ServiceFactory.call, 
+      constants.{{constantCase action}},
+      {}
+    );
+    yield put(actions.{{camelCase action}}Complete(result));
+  } catch (error) {
+    yield put(actions.{{camelCase action}}Error(error));
+  }
+}
+/*__ADD_WORKER_SAGA__*/

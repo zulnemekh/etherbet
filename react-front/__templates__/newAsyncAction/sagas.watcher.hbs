@@ -1,0 +1,4 @@
+export function* watch{{pascalCase action}}() {
+  yield takeEvery(actions.{{camelCase action}}, {{camelCase action}});
+}
+/*__ADD_WATCHER_SAGA__*/
