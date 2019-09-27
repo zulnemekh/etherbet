@@ -16,7 +16,8 @@ export default class EtherBetService {
     bType,
     from,
   }) {
-    return await contract.methods.createBet(par1, 
+    return await this.contract.methods.createBet(
+      par1, 
       par2, 
       closeTimestamp, 
       isAvailable, 
