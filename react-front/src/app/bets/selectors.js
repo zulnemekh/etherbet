@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import * as constants from './constants';
 
-const getCore = state => state[constants.NAME];
-
+const getBets = state => state[constants.NAME];
+export const getLoader = createSelector(getBets, ({loader}) => loader);
 /*__ADD_SELECTORS__*/

@@ -7,22 +7,9 @@ export default class EtherBetService {
     this.contract = ContractFactory.getInstance(web3, BET_ABI);
     this.contract.options.address="0x9Ffc9b26A126E4796B5b9F9a8B90Fc55E642aE17";
   }
-  async createBet({
-    par1, 
-    par2, 
-    closeTimestamp, 
-    isAvailable, 
-    desc,
-    bType,
-    from,
-  }) {
+  async createBet({payload, from}) {
     return await this.contract.methods.createBet(
-      par1, 
-      par2, 
-      closeTimestamp, 
-      isAvailable, 
-      desc,
-      bType
+      ...payload
     ).send({from})
   }
 /*__ADD_SERVICE_METHOD__*/

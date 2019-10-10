@@ -3,17 +3,21 @@ import ServiceFactory from "lib/serviceFactory";
 import * as actions from './actions';
 import * as selectors from './selectors';
 import * as constants from './constants';
+import * as coreSelectors from './../core/selectors';
 
 
 export function* createBet(action) {
+  const { accountAddress } = yield select(coreSelectors.getProfile);
+  const params = {payload: action.payload, from: accountAddress }
   try {
     const result = yield call(
       ServiceFactory.call, 
       constants.CREATE_BET_URL,
-      action.payload
+      params,
     );
     yield put(actions.createBetComplete(result));
   } catch (error) {
+    console.log(error);
     yield put(actions.createBetError(error));
   }
 }
@@ -25,7 +29,7 @@ export function* watchCreateBet() {
 }
 /*__ADD_WATCHER_SAGA__*/
 export default [
-    watchCreateBet,
+  watchCreateBet,
 /*__EXPORT_WATCHER_SAGA__*/
 ];
 

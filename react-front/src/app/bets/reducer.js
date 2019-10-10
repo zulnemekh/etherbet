@@ -4,21 +4,31 @@ import * as constants from './constants';
 
 export const defaultState = {
   errors: {},
+  loader: {},
 };
 
 export default handleActions({
 
   [actions.createBet]: (state, action, meta) => ({
     ...state,
-    isCreateBetLoading: true,
+    loader: {
+      ...state.loader,
+      [constants.CREATE_BET]: true
+    },
   }),
   [actions.createBetComplete]: (state, action, meta) => ({
     ...state,
-    isCreateBetLoading: false,
+    loader: {
+      ...state.loader,
+      [constants.CREATE_BET]: false
+    },
   }),
   [actions.createBetError]: (state, action, meta) => ({
     ...state,
-    isCreateBetLoading: false,
+    loader: {
+      ...state.loader,
+      [constants.CREATE_BET]: false
+    },
     errors: {
       ...state.error,
       [constants.CREATE_BET]: action.payload.message
