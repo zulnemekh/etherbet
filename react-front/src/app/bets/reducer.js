@@ -34,5 +34,22 @@ export default handleActions({
       [constants.CREATE_BET]: action.payload.message
     }
   }),
+  [actions.getBets]: (state, action, meta) => ({
+    ...state,
+    isGetBetsLoading: true,
+  }),
+  [actions.getBetsComplete]: (state, action, meta) => ({
+    ...state,
+    isGetBetsLoading: false,
+    betList: action.payload
+  }),
+  [actions.getBetsError]: (state, action, meta) => ({
+    ...state,
+    isGetBetsLoading: false,
+    errors: {
+      ...state.error,
+      [constants.GET_BETS]: action.payload.message
+    }
+  }),
 /*__ADD_ACTION_HANDLER__*/
 }, defaultState);

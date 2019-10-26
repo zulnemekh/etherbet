@@ -9,5 +9,9 @@ export default [
     path: '/bets/new',
     component: screens.CreateBet,
   },
+  {
+    path: '/',
+    component: screens.Index,
+  },
 /*__ADD_ROUTES__*/
 ]

@@ -1,18 +1,43 @@
 import ContractFactory from '../lib/ContractFactory';
 
 export default class EtherBetService {
-  constructor(storage, web3) {
-    this.storage = storage;
-    this.web3 = web3;
-    this.contract = ContractFactory.getInstance(web3, BET_ABI);
-    this.contract.options.address="0x9Ffc9b26A126E4796B5b9F9a8B90Fc55E642aE17";
-  }
-  async createBet({payload, from}) {
-    return await this.contract.methods.createBet(
-      ...payload
-    ).send({from})
-  }
-/*__ADD_SERVICE_METHOD__*/
+	constructor(storage, web3) {
+		this.storage = storage;
+		this.web3 = web3;
+		this.contract = ContractFactory.getInstance(web3, BET_ABI);
+		this.contract.options.address = "0x9Ffc9b26A126E4796B5b9F9a8B90Fc55E642aE17";
+	}
+
+	async createBet({ payload, from }) {
+		return await this.contract.methods.createBet(
+			...payload
+		).send({ from })
+	}
+
+	async getBets() {
+    window.contract = this.contract;
+    let bets = [];
+    let betLength = 0;
+    let promises = [];
+
+    betLength = await this.contract.methods.getBetLength().call()
+    for(let i = 0; i < betLength; i++){
+      promises.push(this.contract.methods.getBet(i).call())
+    }
+
+    bets = await Promise.all(promises);
+
+    bets = bets.map(bet => ({
+      par1: bet[0],
+      par2: bet[1],
+      expiryDate: bet[2],
+      category: bet[3],
+      isPrivate: bet[4],
+      description: bet[5],
+    }));
+    return bets;
+	}
+	/*__ADD_SERVICE_METHOD__*/
 }
 
 

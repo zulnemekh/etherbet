@@ -21,15 +21,32 @@ export function* createBet(action) {
     yield put(actions.createBetError(error));
   }
 }
+export function* getBets() {
+  try {
+    const result = yield call(
+      ServiceFactory.call, 
+      constants.GET_BETS_URL,
+      {}
+    );
+    yield put(actions.getBetsComplete(result));
+  } catch (error) {
+    yield put(actions.getBetsError(error));
+  }
+}
 /*__ADD_WORKER_SAGA__*/
+
 
 
 export function* watchCreateBet() {
   yield takeEvery(actions.createBet, createBet);
 }
+export function* watchGetBets() {
+  yield takeEvery(actions.getBets, getBets);
+}
 /*__ADD_WATCHER_SAGA__*/
 export default [
   watchCreateBet,
+  watchGetBets,
 /*__EXPORT_WATCHER_SAGA__*/
 ];
 
