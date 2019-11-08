@@ -1,0 +1,8 @@
+
+export const INIT_BEGIN = "@@core/INIT_BEGIN";
+export const INIT_COMPLETE = "@@core/INIT_COMPLETE";
+export const INIT_ERROR = "@@core/INIT_ERROR";
+export const UNLOCK_METAMASK_BEGIN = "@@core/UNLOCK_METAMASK_BEGIN";
+export const UNLOCK_METAMASK_COMPLETE = "@@core/UNLOCK_METAMASK_COMPLETE";
+export const UNLOCK_METAMASK_ERROR = "@@core/UNLOCK_METAMASK_ERROR";
+/*__ADD_ACTION_TYPES__*/

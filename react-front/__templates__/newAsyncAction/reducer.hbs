@@ -1,0 +1,17 @@
+  [actions.{{camelCase action}}]: (state, action, meta) => ({
+    ...state,
+    is{{pascalCase action}}Loading: true,
+  }),
+  [actions.{{camelCase action}}Complete]: (state, action, meta) => ({
+    ...state,
+    is{{pascalCase action}}Loading: false,
+  }),
+  [actions.{{camelCase action}}Error]: (state, action, meta) => ({
+    ...state,
+    is{{pascalCase action}}Loading: false,
+    errors: {
+      ...state.error,
+      [constants.{{constantCase action}}]: action.payload.message
+    }
+  }),
+/*__ADD_ACTION_HANDLER__*/
