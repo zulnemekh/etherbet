@@ -7,4 +7,7 @@ export const initError = createAction(types.INIT_ERROR, value => value);
 export const unlockMetamask = createAction(types.UNLOCK_METAMASK_BEGIN, value => value);
 export const unlockMetamaskComplete = createAction(types.UNLOCK_METAMASK_COMPLETE, value => value);
 export const unlockMetamaskError = createAction(types.UNLOCK_METAMASK_ERROR, value => value);
+export const createBet = createAction(types.CREATE_BET_BEGIN, value => value);
+export const createBetComplete = createAction(types.CREATE_BET_COMPLETE, value => value);
+export const createBetError = createAction(types.CREATE_BET_ERROR, value => value);
 /*__ADD_ACTION_CREATOR__*/

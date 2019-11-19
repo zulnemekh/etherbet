@@ -11,7 +11,7 @@ export default [
   },
   {
     path: '/',
-    component: screens.Index,
+    component: screens.BetList,
   },
 /*__ADD_ROUTES__*/
 ]

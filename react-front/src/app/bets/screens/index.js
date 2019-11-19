@@ -1,12 +1,12 @@
 import CreateBet from './CreateBet';
 import BetDetail from './BetDetail';
-import Index from './Index';
+import BetList from './BetList';
 /*__IMPORT_SCREENS__*/
 
 
 export default {
 	CreateBet,
 	BetDetail,
-	Index,
+	BetList,
 /*__EXPORT_SCREENS__*/
 };

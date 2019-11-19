@@ -4,6 +4,7 @@ import * as constants from './constants';
 
 export const defaultState = {
   errors: {},
+  loader: {},
   profile: {},
 };
 
@@ -44,6 +45,31 @@ export default handleActions({
     errors: {
       ...state.error,
       [constants.UNLOCK_METAMASK]: action.payload.message
+    }
+  }),
+  [actions.createBet]: (state, action, meta) => ({
+    ...state,
+    loader: {
+      ...state.error,
+      [constants.CREATE_BET]: true
+    },
+  }),
+  [actions.createBetComplete]: (state, action, meta) => ({
+    ...state,
+    loader: {
+      ...state.error,
+      [constants.CREATE_BET]: false
+    },
+  }),
+  [actions.createBetError]: (state, action, meta) => ({
+    ...state,
+    loader: {
+      ...state.error,
+      [constants.CREATE_BET]: false
+    },
+    errors: {
+      ...state.error,
+      [constants.CREATE_BET]: action.payload.message
     }
   }),
 /*__ADD_ACTION_HANDLER__*/
