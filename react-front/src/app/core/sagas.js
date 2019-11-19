@@ -37,7 +37,6 @@ export function* createBet({ payload }) {
       constants.CREATE_BET_URL,
       {params: payload, from}
     );
-    console.log(result);
     yield put(actions.createBetComplete(result));
   } catch (error) {
     yield put(actions.createBetError(error));

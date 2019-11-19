@@ -89,8 +89,10 @@ const CreateBet = ({
             className="uk-select" 
             id="Category"
           >
-            <option>Option 01</option>
-            <option>Option 02</option>
+            <option>Wrestling</option>
+            <option>Boxing</option>
+            <option>BasketBall</option>
+            <option>Chess</option>
           </select>
         </div>
       </div>

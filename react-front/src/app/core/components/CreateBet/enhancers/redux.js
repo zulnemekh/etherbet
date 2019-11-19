@@ -15,12 +15,13 @@ export const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch => ({
   createBet(values){
     dispatch(actions.createBet([
-      utils.utf8ToHex(values.par1),
-      utils.utf8ToHex(values.par2),
+      values.par1,
+      values.par2,
       moment(values.closeTIMESTAMP).unix(),
       values.isAvailable,
-      utils.utf8ToHex(values.description),
-      utils.utf8ToHex(values.bType)
+      values.bType,
+      values.description,
+      true
     ]));
   },
 });
