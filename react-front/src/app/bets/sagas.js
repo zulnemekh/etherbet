@@ -17,7 +17,6 @@ export function* createBet(action) {
     );
     yield put(actions.createBetComplete(result));
   } catch (error) {
-    console.log(error);
     yield put(actions.createBetError(error));
   }
 }

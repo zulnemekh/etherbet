@@ -11,11 +11,7 @@ store.runSaga();
 
 window.store = store;
 
-if(window.web3){
-  window.web3.currentProvider.publicConfigStore.on('update',()=>{
-    store.dispatch(core.actions.init());
-  });
-}
+
 
 class App extends React.Component {
   componentDidMount(){

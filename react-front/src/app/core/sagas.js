@@ -5,7 +5,7 @@ import * as selectors from './selectors';
 import * as constants from './constants';
 
 
-export function* init() {
+export function* init({payload}) {
   try {
     const result = yield call(
       ServiceFactory.call, 
@@ -29,7 +29,22 @@ export function* unlockMetamask() {
     yield put(actions.unlockMetamaskError(error));
   }
 }
+export function* createBet({ payload }) {
+  const {accountAddress: from} = yield select(selectors.getProfile)
+  try {
+    const result = yield call(
+      ServiceFactory.call, 
+      constants.CREATE_BET_URL,
+      {params: payload, from}
+    );
+    console.log(result);
+    yield put(actions.createBetComplete(result));
+  } catch (error) {
+    yield put(actions.createBetError(error));
+  }
+}
 /*__ADD_WORKER_SAGA__*/
+
 
 
 
@@ -39,10 +54,14 @@ export function* watchInit() {
 export function* watchUnlockMetamask() {
   yield takeEvery(actions.unlockMetamask, unlockMetamask);
 }
+export function* watchCreateBet() {
+  yield takeEvery(actions.createBet, createBet);
+}
 /*__ADD_WATCHER_SAGA__*/
 export default [
   watchInit,
   watchUnlockMetamask,
+  watchCreateBet,
 /*__EXPORT_WATCHER_SAGA__*/
 ];
 

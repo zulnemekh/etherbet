@@ -1,43 +1,38 @@
 import React from 'react';
+import UIKit from 'uikit';
 import { Link } from 'react-router-dom';
 import enhancers from './enhancers';
 
-const MainLayout = ({children}) => (<>
+import CreateBet from './../CreateBet';
+
+const MainLayout = ({children, profile, unlock}) => (<>
 <nav className="uk-navbar-container" uk-navbar="true">
 
 <div className="uk-navbar-left">
-  <Link to="/" className="uk-navbar-item uk-logo">EtherBet</Link>
+  <Link to="/" className="uk-navbar-item uk-logo" style={{color: "#fff"}}>EtherBet</Link>
 </div>
 
+<div className="uk-navbar-center">
+  {profile && profile.accountAddress && 
+  <button className="btn1" onClick={()=>UIKit.modal("#modal-sections").show()}><span>Create Bet</span></button>}
+  
+</div>
 <div className="uk-navbar-right">
+  {profile && profile.accountAddress ? 
+    <p style={{color: "#fff"}}> { profile.accountAddress }</p>
+  :
+  <button onClick={()=>unlock()} className="btn1"><span>Login</span></button>
+  }
 
-  <ul className="uk-navbar-nav">
-      <li className="uk-active"><a href="#">Active</a></li>
-      <li>
-          <a href="#">Parent</a>
-          <div className="uk-navbar-dropdown">
-              <ul className="uk-nav uk-navbar-dropdown-nav">
-                  <li className="uk-active"><a href="#">Active</a></li>
-                  <li><a href="#">Item</a></li>
-                  <li><a href="#">Item</a></li>
-              </ul>
-          </div>
-      </li>
-      <li><a href="#">Item</a></li>
-  </ul>
-
-  <div className="uk-navbar-item">
-    <button href="#" className="btn1"><span>Login</span></button>
-
-  </div>
 </div>
 
 </nav>
-<div style={{paddingTop: "150px",}}>
+<div style={{paddingTop: "150px", height: "100vh"}}>
   <div className="uk-container">
     {children}
   </div>
 </div>
+<CreateBet />
 </>);
 
 

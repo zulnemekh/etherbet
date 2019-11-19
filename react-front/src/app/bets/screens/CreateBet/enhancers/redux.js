@@ -10,7 +10,6 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   createBet(values){
-    console.log(values);
     dispatch(actions.createBet(
       [
         values.player1,

@@ -6,6 +6,7 @@ import core from 'core';
 
 export const mapStateToProps = state => ({
   loading: selectors.getLoader(state)[constants.CREATE_BET],
+  bets: selectors.getBetList(state),
 });
 
 export const mapDispatchToProps = dispatch => ({
