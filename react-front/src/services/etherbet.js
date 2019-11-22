@@ -5,13 +5,13 @@ export default class EtherBetService {
     this.storage = storage;
     this.web3 = web3;
     this.contract = ContractFactory.getInstance(web3, BET_ABI);
-    this.contract.options.address = "0x770ab653f7f642e5b08eab295bc0a182ec06ade7";
+    this.contract.options.address = "0x0d434cf5e0B31c9871Cb4743Ca9690EeCdfCf19f";
     window.contract = this.contract;
     window.web3= this.web3;
   }
 
   async createBet({ params, from }) {
-	
+
     return this.contract.methods.createBet(
       ...params
     ).send({ from })
@@ -34,16 +34,19 @@ export default class EtherBetService {
       par1: bet[0],
       par2: bet[1],
       expiryDate: bet[2],
-      category: bet[3],
-      isPrivate: bet[4],
-      description: bet[5],
+      winner: bet[3],
+      isAvailable: bet[4],
+      isPublic: bet[5],
+      category: bet[6],
+      description: bet[7],
+      canDraw: bet[8],
     }));
     console.log(bets);
     return bets;
   }
 
   async getBet(id) {
-    const bet = await this.contract.methods.getBetInfo(id).call();
+    const bet = await this.contract.methods.bets(id).call();
     return { id, ...bet }
   }
   /*__ADD_SERVICE_METHOD__*/

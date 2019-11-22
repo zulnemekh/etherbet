@@ -9,25 +9,30 @@ class Index extends Component {
   }
   render() {
     const { bets } = this.props;
-    return (<div className="projects">
+    const takeBet = "Take Bet";
+    return (<div className="tokens-area">
 
       <div className="uk-child-width-expand@s uk-text-center" uk-grid="true">
         {bets && bets.map((bet) => {
           return (
             <div className="uk-width-1-1@s uk-width-1-3@m uk-width-1-3@l" key={bet.id}>
-              <div className="project-list">
-                <div className="content">
-                  <h3>{bet.par1 } VS {bet.par2 }</h3>
-                  <p>{bet.description}</p>
-                  <p>{bet.category}</p>
+              <div className="tokens mr-l50">
+                <div className="token-name"> {bet.category} </div>
+                <div className="token-body">
+                  <button className="left-btn" onClick=""> {bet.par1} </button>
+                  <p>VS</p>
+                  <button className="left-btn-2" onClick=""> {bet.par2} </button>
+                  <hr></hr>
+                  <span className="token-con"> {bet.description} </span>
                 </div>
               </div>
             </div>
           )
         })}
-        
+
       </div>
-    </div>);
+    </div>
+  );
   }
 }
 

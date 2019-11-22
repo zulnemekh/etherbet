@@ -16,7 +16,7 @@ const CreateBet = ({
 }) => (
 <div id="modal-sections" uk-modal="true">
   <div className="uk-modal-dialog">
-    
+
     <form onSubmit={handleSubmit} className="uk-form-stacked">
     <button className="uk-modal-close-default" type="button" uk-close="true"></button>
     <div className="uk-modal-header">
@@ -28,27 +28,27 @@ const CreateBet = ({
       <div className="uk-width-1-2">
         <label className="uk-form-label" htmlFor="Participant 1">Participant 1</label>
         <div className="uk-form-controls">
-          <input 
+          <input
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.par1}
             name="par1"
-            className="uk-input" 
-            id="Participant 1" 
-            type="text" 
+            className="uk-input"
+            id="Participant 1"
+            type="text"
             placeholder="Some text..."/>
         </div>
       </div>
       <div className="uk-width-1-2">
         <label className="uk-form-label" htmlFor="Participant 2">Participant 2</label>
         <div className="uk-form-controls">
-          <input 
+          <input
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.par2}
             name="par2"
-            className="uk-input" 
-            id="Participant 2" 
+            className="uk-input"
+            id="Participant 2"
             type="text" placeholder="Some text..."/>
         </div>
       </div>
@@ -67,12 +67,12 @@ const CreateBet = ({
       <div className="uk-width-1-2">
         <label className="uk-form-label" htmlFor="available">Available</label>
         <div className="uk-form-controls">
-          <input 
+          <input
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.isAvailable}
             name="isAvailable"
-            className="uk-checkbox" 
+            className="uk-checkbox"
             id="available"
             type="checkbox"/>
         </div>
@@ -81,14 +81,15 @@ const CreateBet = ({
       <div className="uk-width-1-1">
         <label className="uk-form-label" htmlFor="Category">Category</label>
         <div className="uk-form-controls">
-          <select 
+          <select
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.bType}
             name="bType"
-            className="uk-select" 
+            className="uk-select"
             id="Category"
           >
+            <option>UFC</option>
             <option>Wrestling</option>
             <option>Boxing</option>
             <option>BasketBall</option>
@@ -100,13 +101,13 @@ const CreateBet = ({
       <div className="uk-width-1-1">
         <label className="uk-form-label" htmlFor="Category">Description</label>
         <div className="uk-form-controls">
-          <input 
+          <input
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.description}
             name="description"
-            className="uk-input" 
-            id="Category" 
+            className="uk-input"
+            id="Category"
             type="text" placeholder="Some text..."/>
         </div>
       </div>
@@ -117,7 +118,7 @@ const CreateBet = ({
       <button className="uk-button uk-button-primary" type="submit">Create</button>
     </div>
   </form>
-    
+
   </div>
 </div>
 );

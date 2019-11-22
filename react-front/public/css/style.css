@@ -33,7 +33,7 @@
 
 
 /* ....................................
-1.1 Reset CSS 
+1.1 Reset CSS
 .......................................*/
 
 a {
@@ -720,7 +720,7 @@ header {
     left: 0;
     right: 0;
     z-index: 980;
-    background: #2c2e53;
+    background: #262848;
     padding: 14px;
     padding-top: 30px;
 }
@@ -2607,6 +2607,10 @@ footer .footer-top .con ul li a:hover {
     padding: 30px;
 }
 
+.mr-l50 {
+    margin-left: 50px;
+}
+
 .tokens-area {
     background: #2c2e53;
     position: relative;
@@ -2653,19 +2657,53 @@ footer .footer-top .con ul li a:hover {
     font-weight: 700;
     font-size: 18px;
     color: #ffffff;
+    margin: 5px 0 5px;
 }
 
 .tokens-area .tokens .token-body .left-btn {
     display: inline-block;
     height: 60px;
-    line-height: 54px;
+    /* line-height: 54px; */
     padding: 0 45px;
     border-radius: 50px;
     border: 3px solid #5e619c;
-    font-size: 20px;
-    font-weight: 900;
+    font-size: 18px;
+    font-weight: 800;
     color: #ffffff;
     background: transparent;
+}
+
+.tokens-area .tokens .token-body .left-btn-2 {
+    display: inline-block;
+    height: 60px;
+    /* line-height: 54px; */
+    padding: 0 45px;
+    border-radius: 50px;
+    border: 3px solid #393d98;
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    background: transparent;
+}
+
+.tokens-area .tokens .token-body .left-btn:hover {
+    background: rgba(45, 193, 201, 1);
+    background: -moz-linear-gradient(left, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(45, 193, 201, 1)), color-stop(100%, rgba(57, 100, 208, 1)));
+    background: -webkit-linear-gradient(left, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
+    background: -o-linear-gradient(left, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
+    background: linear-gradient(to right, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
+}
+
+.tokens-area .tokens .token-body .left-btn-2:hover {
+    background: rgba(45, 193, 201, 1);
+    background: -moz-linear-gradient(left, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(45, 193, 201, 1)), color-stop(100%, rgba(57, 100, 208, 1)));
+    background: -webkit-linear-gradient(left, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
+    background: -o-linear-gradient(left, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
+    background: linear-gradient(to right, rgba(45, 193, 201, 1) 0%, rgba(57, 100, 208, 1) 100%);
 }
 
 .tokens-area .tokens .token-body .right-btn {
@@ -2723,6 +2761,12 @@ footer .footer-top .con ul li a:hover {
 
 .tokens-area .tokens .token-body .prices table tr td:last-child {
     text-align: center;
+}
+
+.tokens-area .token-con {
+    color: #fff;
+    margin: 50px 0 0;
+    font-size: 20px;
 }
 
 .tokens-area .token-con {
