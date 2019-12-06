@@ -8,6 +8,7 @@ export default class ServiceFactory {
 
     if (urlParts.length === 2) {
       const method = urlParts[1];
+
       const service = ServiceFactory._memoizeAndReturnInstance(urlParts[0]);
 
       if (!service) {
@@ -35,7 +36,7 @@ export default class ServiceFactory {
     }
 
     if (!ServiceFactory[service]) {
-      ServiceFactory[service] = new ServiceClass(storage, web3); 
+      ServiceFactory[service] = new ServiceClass(storage, web3);
     }
 
     return ServiceFactory[service];

@@ -17,6 +17,13 @@ export default class EtherBetService {
     ).send({ from })
   }
 
+  async takeBet({ params, from }) {
+
+    return this.contract.methods.takeBet(
+      ...params
+    ).send({ from })
+  }
+
   async getBets() {
     let bets = [];
     let betLength = 0;

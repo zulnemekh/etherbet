@@ -1,4 +1,4 @@
-import {handleActions} from 'redux-actions'; 
+import {handleActions} from 'redux-actions';
 import * as actions from './actions';
 import * as constants from './constants';
 
@@ -72,5 +72,31 @@ export default handleActions({
       [constants.CREATE_BET]: action.payload.message
     }
   }),
+  [actions.takeBet]: (state, action, meta) => ({
+    ...state,
+    loader: {
+      ...state.error,
+      [constants.TAKE_BET]: true
+    },
+  }),
+  [actions.takeBetComplete]: (state, action, meta) => ({
+    ...state,
+    loader: {
+      ...state.error,
+      [constants.TAKE_BET]: false
+    },
+  }),
+  [actions.takeBetError]: (state, action, meta) => ({
+    ...state,
+    loader: {
+      ...state.error,
+      [constants.TAKE_BET]: false
+    },
+    errors: {
+      ...state.error,
+      [constants.TAKE_BET]: action.payload.message
+    }
+  }),
+
 /*__ADD_ACTION_HANDLER__*/
 }, defaultState);
