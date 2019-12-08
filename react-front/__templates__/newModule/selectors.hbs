@@ -1,6 +1,14 @@
 import { createSelector } from 'reselect';
 import * as constants from './constants';
 
-const getCore = state => state[constants.NAME];
+const get{{pascalCase name}} = state => state[constants.NAME];
+
+export const makeErrorSelector = (feature) => {
+  return createSelector(get{{pascalCase name}}, ({ errors }) => errors[feature])
+}
+
+export const makeLoadingSelector = (feature) => {
+  return createSelector(get{{pascalCase name}}, ({ loader }) => loader[feature])
+}
 
 /*__ADD_SELECTORS__*/

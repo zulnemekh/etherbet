@@ -6,10 +6,6 @@ export default [
     component: screens.BetDetail,
   },
   {
-    path: '/bets/new',
-    component: screens.CreateBet,
-  },
-  {
     path: '/',
     component: screens.BetList,
   },

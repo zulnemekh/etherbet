@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import enhancers from './enhancers';
 
 class {{pascalCase screen}} extends Component {
 
   render() {
     return (
-        <div>{{pascalCase screen}}</div>
+      <div>{{pascalCase screen}}</div>
     );
   }
 }
 
-export default {{pascalCase screen}};
+export default enhancers.redux({{pascalCase screen}});

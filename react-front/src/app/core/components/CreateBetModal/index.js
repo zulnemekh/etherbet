@@ -1,6 +1,7 @@
 import React from 'react';
 import { withFormik } from 'formik';
 import DateTimePicker from 'react-datetime-picker';
+import UIKit from 'uikit';
 import moment from 'moment';
 import enhancers from './enhancers';
 
@@ -13,7 +14,8 @@ const CreateBet = ({
   handleSubmit,
   setFieldValue,
   loader,
-}) => (
+}) => (<>
+<button className="btn1" onClick={()=>UIKit.modal("#modal-sections").show()}><span>Create Bet</span></button>
 <div id="modal-sections" uk-modal="true">
   <div className="uk-modal-dialog">
 
@@ -121,7 +123,7 @@ const CreateBet = ({
 
   </div>
 </div>
-);
+</>);
 
 const withForm =  withFormik({
   mapPropsToValues: () => ({

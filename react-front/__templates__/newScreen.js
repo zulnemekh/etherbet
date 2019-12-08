@@ -32,6 +32,21 @@ module.exports = {
       templateFile: '__templates__/newScreen/index.hbs'
     },
     {
+      type: 'add',
+      path: 'src/app/{{module}}/screens/{{pascalCase screen}}/enhancers/index.js',
+      templateFile: '__templates__/newScreen/enhancers/index.hbs'
+    },
+    {
+      type: 'add',
+      path: 'src/app/{{module}}/screens/{{pascalCase screen}}/enhancers/redux.js',
+      templateFile: '__templates__/newScreen/enhancers/redux.hbs'
+    },
+    {
+      type: 'add',
+      path: 'src/app/{{module}}/screens/{{pascalCase screen}}/enhancers/formik.js',
+      templateFile: '__templates__/newScreen/enhancers/formik.hbs'
+    },
+    {
       type: 'modify',
       path: 'src/app/{{module}}/screens/index.js',
       pattern: /(\/\*__IMPORT_SCREENS__\*\/)/gi,

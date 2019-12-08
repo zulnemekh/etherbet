@@ -14,8 +14,20 @@ module.exports = {
   actions: [
     {
       type: 'add',
-      path: 'src/services/{{lowerCase name}}.js',
+      path: 'src/services/{{pascalCase name}}.js',
       templateFile: '__templates__/newService/index.hbs'
+    },
+    {
+      type: 'modify',
+      path: 'src/services/index.js',
+      pattern: /(\/\*__IMPORT_SERVICE__\*\/)/gi,
+      templateFile: '__templates__/newService/service.import.hbs',
+    },
+    {
+      type: 'modify',
+      path: 'src/services/index.js',
+      pattern: /(\/\*__EXPORT_SERVICE__\*\/)/gi,
+      templateFile: '__templates__/newService/service.export.hbs',
     },
   ]  // array of actions
 }

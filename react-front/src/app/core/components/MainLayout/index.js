@@ -1,9 +1,8 @@
 import React from 'react';
-import UIKit from 'uikit';
 import { Link } from 'react-router-dom';
 import enhancers from './enhancers';
 
-import CreateBet from './../CreateBet';
+import CreateBetModal from '../CreateBetModal';
 
 const MainLayout = ({children, profile, unlock}) => (<>
 <nav className="uk-navbar-container" uk-navbar="true">
@@ -13,9 +12,7 @@ const MainLayout = ({children, profile, unlock}) => (<>
 </div>
 
 <div className="uk-navbar-center">
-  {profile && profile.accountAddress && 
-  <button className="btn1" onClick={()=>UIKit.modal("#modal-sections").show()}><span>Create Bet</span></button>}
-  
+  {profile && profile.accountAddress && <CreateBetModal />}
 </div>
 <div className="uk-navbar-right">
   {profile && profile.accountAddress ? 
@@ -32,7 +29,7 @@ const MainLayout = ({children, profile, unlock}) => (<>
     {children}
   </div>
 </div>
-<CreateBet />
+
 </>);
 
 

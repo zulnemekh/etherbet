@@ -6,9 +6,11 @@ export default class EtherBetService {
     this.web3 = web3;
     this.contract = ContractFactory.getInstance(web3, BET_ABI);
     this.contract.options.address = "0x0d434cf5e0B31c9871Cb4743Ca9690EeCdfCf19f";
-    window.contract = this.contract;
-    window.web3= this.web3;
-  }
+	}
+	
+	getContract() {
+		return this.contract;
+	}
 
   async createBet({ params, from }) {
 
@@ -29,8 +31,7 @@ export default class EtherBetService {
     let betLength = 0;
     let promises = [];
 
-    betLength = await this.contract.methods.getBetLength().call()
-    console.log(betLength);
+    betLength = await this.contract.methods.getBetLength().call();
     for (let i = 0; i < betLength; i++) {
       promises.push(this.getBet(i));
     }
@@ -48,7 +49,6 @@ export default class EtherBetService {
       description: bet[7],
       canDraw: bet[8],
     }));
-    console.log(bets);
     return bets;
   }
 
