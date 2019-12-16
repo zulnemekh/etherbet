@@ -2,7 +2,7 @@ import screens from './screens';
 
 export default [
   {
-    path: '/bets/detail',
+    path: '/bets/:id',
     component: screens.BetDetail,
   },
   {

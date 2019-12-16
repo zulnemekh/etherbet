@@ -53,9 +53,25 @@ export default class EtherBetService {
   }
 
   async getBet(id) {
-    const bet = await this.contract.methods.bets(id).call();
+		const bet = await this.contract.methods.bets(id).call();
     return { id, ...bet }
-  }
+	}
+	
+	async getUserBetOf({bet_id, address}) {
+		return await this.contract.methods.getUserBetOf(bet_id, address).call();
+	}
+
+	async betUserAmountOf({bet_id, address}) {
+		return await this.contract.methods.betUserAmountOf(bet_id, address).call();
+	}
+
+	async getUserBetsLength({bet_id}) {
+		return await this.contract.methods.getUserBetsLength(bet_id).call();
+	}
+
+	async getTotalAmountOf({bet_id}) {
+		return await this.contract.methods.getTotalAmountOf(bet_id).call();
+	}
   /*__ADD_SERVICE_METHOD__*/
 }
 

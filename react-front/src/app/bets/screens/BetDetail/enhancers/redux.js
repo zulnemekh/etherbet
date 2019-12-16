@@ -2,24 +2,17 @@ import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import * as constants from '../../../constants';
 import * as selectors from '../../../selectors';
-import core from 'core';
+
+const getBetLoader = selectors.makeLoadingSelector(constants.GET_BET);
 
 export const mapStateToProps = state => ({
-  loading: selectors.getLoader(state)[constants.CREATE_BET],
+  isLoadingBet: getBetLoader(state),
+  bet: selectors.getSelectedBet(state),
 });
 
 export const mapDispatchToProps = dispatch => ({
-  createBet(values){
-    dispatch(actions.createBet(
-      [
-        values.player1,
-        values.player2,
-        values.closeTime,
-        values.isAvailable,
-        values.description,
-        values.category,
-      ]
-    ))
+  getBet(id){
+    dispatch(actions.getBet(id));
   },
 });
 

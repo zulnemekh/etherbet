@@ -14,6 +14,8 @@
     height: 100%;
 }
 
+
+
 #status {
     background-position: center center;
     background-repeat: no-repeat;
@@ -4216,4 +4218,8 @@ canvas {
     .token-details .cart-list .imgs {
         display: none;
     }
+}
+
+.uk-countdown-number {
+    font-size: 1rem;
 }

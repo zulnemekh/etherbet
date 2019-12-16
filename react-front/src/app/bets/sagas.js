@@ -1,4 +1,4 @@
-import {call, put, select, takeEvery, delay} from 'redux-saga/effects';
+import {call, put, select, takeEvery, take} from 'redux-saga/effects';
 import ServiceFactory from "lib/serviceFactory";
 import * as actions from './actions';
 import * as selectors from './selectors';
@@ -49,17 +49,84 @@ export function* takeBet({ payload }) {
     ).send({from: accountAddress, value: helpers.toWei(amount)});
 
     const txHash = yield call(helpers.getPromiEvent, result, 'transactionHash');
-    console.log(txHash);
     const receipt = yield call(helpers.getPromiEvent, result, 'receipt');
-    console.log(receipt);
     yield put(actions.takeBetComplete(receipt));
   } catch (error) {
     yield put(actions.takeBetError(error));
   }
 }
+export function* getBet({ payload: id }) {
+  try {
+    const result = yield call(
+      ServiceFactory.call, 
+      constants.GET_BET_URL,
+      id
+    );
+    yield put(actions.getBetComplete(result));
+  } catch (error) {
+    yield put(actions.getBetError(error));
+  }
+}
+export function* getUserBetOf({ payload: bet_id }) {
+  const { accountAddress: address } = yield select(coreSelectors.getProfile);
+  try {
+    const result = yield call(
+      ServiceFactory.call, 
+      constants.GET_USER_BET_OF_URL,
+      {address, bet_id}
+    );
+    yield put(actions.getUserBetOfComplete(result));
+  } catch (error) {
+    yield put(actions.getUserBetOfError(error));
+  }
+}
+export function* getUserBetsLength({payload: bet_id}) {
+  try {
+    const result = yield call(
+      ServiceFactory.call, 
+      constants.GET_USER_BETS_LENGTH_URL,
+      {bet_id}
+    );
+    yield put(actions.getUserBetsLengthComplete(result));
+  } catch (error) {
+    yield put(actions.getUserBetsLengthError(error));
+  }
+}
+export function* betUserAmountOf({payload: bet_id}) {
+  const { accountAddress: address } = yield select(coreSelectors.getProfile);
+  try {
+    const result = yield call(
+      ServiceFactory.call, 
+      constants.BET_USER_AMOUNT_OF_URL,
+      {bet_id, address}
+    );
+    yield put(actions.betUserAmountOfComplete(result));
+  } catch (error) {
+    yield put(actions.betUserAmountOfError(error));
+  }
+}
+export function* getTotalAmountOf({payload: bet_id}) {
+  try {
+    const result = yield call(
+      ServiceFactory.call, 
+      constants.GET_TOTAL_AMOUNT_OF_URL,
+      {bet_id}
+    );
+    yield put(actions.getTotalAmountOfComplete(result));
+  } catch (error) {
+    yield put(actions.getTotalAmountOfError(error));
+  }
+}
 /*__ADD_WORKER_SAGA__*/
 
 
+export function* watchGetBetComplete() {
+  const { payload: { id }} = yield take(actions.getBetComplete);
+  yield put(actions.getUserBetOf(id));
+  yield put(actions.getUserBetsLength(id));
+  yield put(actions.betUserAmountOf(id));
+  yield put(actions.getTotalAmountOf(id));
+}
 
 export function* watchCreateBet() {
   yield takeEvery(actions.createBet, createBet);
@@ -70,11 +137,32 @@ export function* watchGetBets() {
 export function* watchTakeBet() {
   yield takeEvery(actions.takeBet, takeBet);
 }
+export function* watchGetBet() {
+  yield takeEvery(actions.getBet, getBet);
+}
+export function* watchGetUserBetOf() {
+  yield takeEvery(actions.getUserBetOf, getUserBetOf);
+}
+export function* watchGetUserBetsLength() {
+  yield takeEvery(actions.getUserBetsLength, getUserBetsLength);
+}
+export function* watchBetUserAmountOf() {
+  yield takeEvery(actions.betUserAmountOf, betUserAmountOf);
+}
+export function* watchGetTotalAmountOf() {
+  yield takeEvery(actions.getTotalAmountOf, getTotalAmountOf);
+}
 /*__ADD_WATCHER_SAGA__*/
 export default [
   watchCreateBet,
   watchGetBets,
   watchTakeBet,
+  watchGetBet,
+  watchGetUserBetOf,
+  watchGetUserBetsLength,
+  watchGetBetComplete,
+  watchBetUserAmountOf,
+  watchGetTotalAmountOf,
 /*__EXPORT_WATCHER_SAGA__*/
 ];
 
