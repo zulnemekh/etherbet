@@ -226,5 +226,34 @@ export default handleActions({
       [constants.GET_TOTAL_AMOUNT_OF]: action.payload.message
     }
   }),
+  [actions.betAmountOf]: (state, action, meta) => ({
+    ...state,
+    loaders: {
+      ...state.loaders,
+      [constants.BET_AMOUNT_OF]: true
+    }
+  }),
+  [actions.betAmountOfComplete]: (state, action, meta) => ({
+    ...state,
+    selectedBet: {
+      ...state.selectedBet,
+      betAmountOf: action.payload
+    },
+    loaders: {
+      ...state.loaders,
+      [constants.BET_AMOUNT_OF]: false
+    }
+  }),
+  [actions.betAmountOfError]: (state, action, meta) => ({
+    ...state,
+    loaders: {
+      ...state.loaders,
+      [constants.BET_AMOUNT_OF]: false
+    },
+    errors: {
+      ...state.error,
+      [constants.BET_AMOUNT_OF]: action.payload.message
+    }
+  }),
 /*__ADD_ACTION_HANDLER__*/
 }, defaultState);

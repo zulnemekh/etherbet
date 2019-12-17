@@ -117,6 +117,26 @@ export function* getTotalAmountOf({payload: bet_id}) {
     yield put(actions.getTotalAmountOfError(error));
   }
 }
+export function* betAmountOf({payload: bet_id}) {
+  try {
+    const result = {};
+
+    result["par1"] = yield call(
+      ServiceFactory.call, 
+      constants.BET_AMOUNT_OF_URL,
+      {bet_id, par: 1}
+    );
+    result["par2"] = yield call(
+      ServiceFactory.call, 
+      constants.BET_AMOUNT_OF_URL,
+      {bet_id, par: 2}
+    );
+
+    yield put(actions.betAmountOfComplete(result));
+  } catch (error) {
+    yield put(actions.betAmountOfError(error));
+  }
+}
 /*__ADD_WORKER_SAGA__*/
 
 
@@ -126,6 +146,7 @@ export function* watchGetBetComplete() {
   yield put(actions.getUserBetsLength(id));
   yield put(actions.betUserAmountOf(id));
   yield put(actions.getTotalAmountOf(id));
+  yield put(actions.betAmountOf(id));
 }
 
 export function* watchCreateBet() {
@@ -152,6 +173,9 @@ export function* watchBetUserAmountOf() {
 export function* watchGetTotalAmountOf() {
   yield takeEvery(actions.getTotalAmountOf, getTotalAmountOf);
 }
+export function* watchBetAmountOf() {
+  yield takeEvery(actions.betAmountOf, betAmountOf);
+}
 /*__ADD_WATCHER_SAGA__*/
 export default [
   watchCreateBet,
@@ -163,6 +187,7 @@ export default [
   watchGetBetComplete,
   watchBetUserAmountOf,
   watchGetTotalAmountOf,
+  watchBetAmountOf,
 /*__EXPORT_WATCHER_SAGA__*/
 ];
 

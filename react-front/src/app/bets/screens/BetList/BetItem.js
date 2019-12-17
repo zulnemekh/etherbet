@@ -12,9 +12,9 @@ const Countdown = components.Countdown;
 
 const BetItem = ({bet}) => (
   <div className="uk-width-1-1@s uk-width-1-3@m uk-width-1-3@l" key={bet.id}>
-    <Link to={`bets/${bet.id}`}>
       <div className="tokens mr-l50">
         <div className="token-name"> {bet.category} </div>
+    
         <div className="token-body">
           <TakeBetModal winner={1} bet_id={bet.id} par={bet.par1} />
           <p>VS</p>
@@ -23,9 +23,9 @@ const BetItem = ({bet}) => (
           <Countdown time={convertTime(bet.expiryDate)}/>
           <hr/>
           <span className="token-con"> {bet.description} </span>
+          <Link to={`bets/${bet.id}`}>Detail</Link>
         </div>
       </div>
-    </Link>
   </div>
 );
 
