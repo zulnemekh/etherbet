@@ -1,5 +1,6 @@
 import {call, put, select, takeEvery, take} from 'redux-saga/effects';
 import ServiceFactory from "lib/serviceFactory";
+import _ from 'lodash';
 import * as actions from './actions';
 import * as selectors from './selectors';
 import * as constants from './constants';
@@ -57,11 +58,12 @@ export function* takeBet({ payload }) {
 }
 export function* getBet({ payload: id }) {
   try {
-    const result = yield call(
+    let result = yield call(
       ServiceFactory.call, 
       constants.GET_BET_URL,
       id
     );
+    result = _.omit(result, [0,1,2,3,4,5,6,7,8,9])
     yield put(actions.getBetComplete(result));
   } catch (error) {
     yield put(actions.getBetError(error));
