@@ -5,7 +5,7 @@ export default class EtherBetService {
 		this.storage = storage;
 		this.web3 = web3;
 		this.contract = ContractFactory.getInstance(web3, BET_ABI);
-		this.contract.options.address = "0x8978Dd5F3B17106E9025bd9b2C3dfe6DB558Aa8c";
+		this.contract.options.address = "0x88f8ed684aebb8c25a699b66ad0a54c42fda64ea";
 	}
 
 	getContract() {
@@ -84,6 +84,121 @@ export default class EtherBetService {
 
 const BET_ABI = [
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "bet_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "winner",
+				"type": "uint8"
+			}
+		],
+		"name": "agreeBetWinner",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "bet_id",
+				"type": "uint256"
+			}
+		],
+		"name": "cancelBet",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "par1",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "par2",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "closeTIMESTAMP",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "canDraw",
+				"type": "bool"
+			},
+			{
+				"internalType": "string",
+				"name": "betCategory",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "isPublic",
+				"type": "bool"
+			}
+		],
+		"name": "createBet",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "bet_id",
+				"type": "uint256"
+			}
+		],
+		"name": "setDisableBet",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "bet_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "winner",
+				"type": "uint8"
+			}
+		],
+		"name": "takeBet",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -114,26 +229,6 @@ const BET_ABI = [
 		"type": "fallback"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "bet_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "winner",
-				"type": "uint8"
-			}
-		],
-		"name": "agreeBetWinner",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"constant": true,
 		"inputs": [
 			{
@@ -153,6 +248,72 @@ const BET_ABI = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "bets",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "par1",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "par2",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "closeTIMESTAMP",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "winner",
+				"type": "uint8"
+			},
+			{
+				"internalType": "bool",
+				"name": "isAvailable",
+				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isPublic",
+				"type": "bool"
+			},
+			{
+				"internalType": "string",
+				"name": "betCategory",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "canDraw",
+				"type": "bool"
+			},
+			{
+				"internalType": "address payable",
+				"name": "owner_address",
+				"type": "address"
 			}
 		],
 		"payable": false,
@@ -244,72 +405,6 @@ const BET_ABI = [
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			}
-		],
-		"name": "bets",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "par1",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "par2",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "closeTIMESTAMP",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "winner",
-				"type": "uint8"
-			},
-			{
-				"internalType": "bool",
-				"name": "isAvailable",
-				"type": "bool"
-			},
-			{
-				"internalType": "bool",
-				"name": "isPublic",
-				"type": "bool"
-			},
-			{
-				"internalType": "string",
-				"name": "betCategory",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"internalType": "bool",
-				"name": "canDraw",
-				"type": "bool"
-			},
-			{
-				"internalType": "address payable",
-				"name": "owner_address",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -352,51 +447,6 @@ const BET_ABI = [
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "par1",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "par2",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "closeTIMESTAMP",
-				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "canDraw",
-				"type": "bool"
-			},
-			{
-				"internalType": "string",
-				"name": "betCategory",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"internalType": "bool",
-				"name": "isPublic",
-				"type": "bool"
-			}
-		],
-		"name": "createBet",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -743,41 +793,6 @@ const BET_ABI = [
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "bet_id",
-				"type": "uint256"
-			}
-		],
-		"name": "setDisableBet",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "bet_id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "winner",
-				"type": "uint8"
-			}
-		],
-		"name": "takeBet",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
 		"type": "function"
 	}
 ]

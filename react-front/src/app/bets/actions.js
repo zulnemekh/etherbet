@@ -30,4 +30,7 @@ export const getTotalAmountOfError = createAction(types.GET_TOTAL_AMOUNT_OF_ERRO
 export const betAmountOf = createAction(types.BET_AMOUNT_OF_BEGIN, value => value);
 export const betAmountOfComplete = createAction(types.BET_AMOUNT_OF_COMPLETE, value => value);
 export const betAmountOfError = createAction(types.BET_AMOUNT_OF_ERROR, value => value);
+export const agreeBetWinner = createAction(types.AGREE_BET_WINNER_BEGIN, value => value);
+export const agreeBetWinnerComplete = createAction(types.AGREE_BET_WINNER_COMPLETE, value => value);
+export const agreeBetWinnerError = createAction(types.AGREE_BET_WINNER_ERROR, value => value);
 /*__ADD_ACTION_CREATOR__*/

@@ -139,6 +139,22 @@ export function* betAmountOf({payload: bet_id}) {
     yield put(actions.betAmountOfError(error));
   }
 }
+export function* agreeBetWinner({payload: {id, winner}}) {
+  const { accountAddress: from } = yield select(coreSelectors.getProfile);
+  try {
+    const contract = yield call(
+      ServiceFactory.call, 
+      constants.GET_CONTRACT_URL,
+      {}
+    );
+    let result = contract.methods.agreeBetWinner(id, winner).send({from});
+    const txHash = yield call(helpers.getPromiEvent, result, 'transactionHash');
+    const receipt = yield call(helpers.getPromiEvent, result, 'receipt');
+    yield put(actions.agreeBetWinnerComplete());
+  } catch (error) {
+    yield put(actions.agreeBetWinnerError(error));
+  }
+}
 /*__ADD_WORKER_SAGA__*/
 
 
@@ -178,6 +194,9 @@ export function* watchGetTotalAmountOf() {
 export function* watchBetAmountOf() {
   yield takeEvery(actions.betAmountOf, betAmountOf);
 }
+export function* watchAgreeBetWinner() {
+  yield takeEvery(actions.agreeBetWinner, agreeBetWinner);
+}
 /*__ADD_WATCHER_SAGA__*/
 export default [
   watchCreateBet,
@@ -190,6 +209,7 @@ export default [
   watchBetUserAmountOf,
   watchGetTotalAmountOf,
   watchBetAmountOf,
+  watchAgreeBetWinner,
 /*__EXPORT_WATCHER_SAGA__*/
 ];
 

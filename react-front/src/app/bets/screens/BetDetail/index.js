@@ -11,8 +11,13 @@ class BetDetail extends Component {
   }
 
   render() {
+    const { bet } = this.props;
     return (
-    <div style={{color: "#fff"}}><pre>{JSON.stringify(this.props.bet)}</pre></div>
+      <div style={{color: "#fff"}}>
+        <pre>{JSON.stringify(this.props.bet)}</pre>
+        <button onClick={() => this.props.agreeBetWinner(bet.id, 1)}>Winner 1</button>
+        <button onClick={() => this.props.agreeBetWinner(bet.id, 2)}>Winner 2</button>
+      </div>
     );
   }
 }

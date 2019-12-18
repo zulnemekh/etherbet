@@ -19,4 +19,6 @@ export const GET_TOTAL_AMOUNT_OF = "GET_TOTAL_AMOUNT_OF";
 export const GET_TOTAL_AMOUNT_OF_URL = "etherbet/getTotalAmountOf";
 export const BET_AMOUNT_OF = "BET_AMOUNT_OF";
 export const BET_AMOUNT_OF_URL = "etherbet/betAmountOf";
+export const AGREE_BET_WINNER = "AGREE_BET_WINNER";
+export const AGREE_BET_WINNER_URL = "";
 /*__ADD_CONSTANTS__*/

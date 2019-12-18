@@ -255,5 +255,30 @@ export default handleActions({
       [constants.BET_AMOUNT_OF]: action.payload.message
     }
   }),
+  [actions.agreeBetWinner]: (state, action, meta) => ({
+    ...state,
+    loaders: {
+      ...state.loaders,
+      [constants.AGREE_BET_WINNER]: true
+    }
+  }),
+  [actions.agreeBetWinnerComplete]: (state, action, meta) => ({
+    ...state,
+    loaders: {
+      ...state.loaders,
+      [constants.AGREE_BET_WINNER]: false
+    }
+  }),
+  [actions.agreeBetWinnerError]: (state, action, meta) => ({
+    ...state,
+    loaders: {
+      ...state.loaders,
+      [constants.AGREE_BET_WINNER]: false
+    },
+    errors: {
+      ...state.error,
+      [constants.AGREE_BET_WINNER]: action.payload.message
+    }
+  }),
 /*__ADD_ACTION_HANDLER__*/
 }, defaultState);
