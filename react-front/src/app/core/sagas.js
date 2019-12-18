@@ -4,7 +4,10 @@ import * as actions from './actions';
 import * as selectors from './selectors';
 import * as constants from './constants';
 import * as betActions from '../bets/actions';
+<<<<<<< HEAD
 import { push } from 'connected-react-router';
+=======
+>>>>>>> 103ae4cbf77444888078241ccf856e43e4b0d457
 
 import UIKit from 'uikit';
 
