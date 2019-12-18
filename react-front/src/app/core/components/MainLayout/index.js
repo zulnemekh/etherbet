@@ -4,7 +4,7 @@ import enhancers from './enhancers';
 
 import CreateBetModal from '../CreateBetModal';
 
-const MainLayout = ({children, profile, unlock}) => (<>
+const MainLayout = ({children, profile, unlock, isCreateBetLoading}) => (<>
 <nav className="uk-navbar-container" uk-navbar="true">
 
 <div className="uk-navbar-left">
@@ -13,6 +13,7 @@ const MainLayout = ({children, profile, unlock}) => (<>
 
 <div className="uk-navbar-center">
   {profile && profile.accountAddress && <CreateBetModal />}
+  {isCreateBetLoading && <div uk-spinner="true"></div>}
 </div>
 <div className="uk-navbar-right">
   {profile && profile.accountAddress ? 
@@ -24,7 +25,7 @@ const MainLayout = ({children, profile, unlock}) => (<>
 </div>
 
 </nav>
-<div style={{paddingTop: "150px", height: "100vh"}}>
+<div style={{paddingTop: "150px", minHeight: "100vh"}}>
   <div className="uk-container">
     {children}
   </div>

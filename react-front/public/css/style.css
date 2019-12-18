@@ -2619,13 +2619,14 @@ footer .footer-top .con ul li a:hover {
 }
 
 .tokens-area .tokens {
-    display: inline-block;
+    /* display: inline-block; */
     position: relative;
     text-align: center;
 }
 
 .tokens-area .tokens .token-name {
-    display: inline-block;
+    /* display: inline-block; */
+    margin: 0px 48px;
     color: #fff;
     background: rgba(57, 100, 208, 1);
     background: -moz-linear-gradient(left, rgba(57, 100, 208, 1) 0%, rgba(45, 193, 201, 1) 100%);
@@ -2649,7 +2650,7 @@ footer .footer-top .con ul li a:hover {
     background: #1a1c35;
     height: 464px;
     padding: 50px 55px;
-    display: inline-block;
+    /* display: inline-block; */
     border-radius: 22px;
     position: relative;
     z-index: 999;
@@ -4220,6 +4221,9 @@ canvas {
     }
 }
 
-.uk-countdown-number {
+.bet-detail .uk-countdown-number {
+    font-size: 6rem;
+}
+.bet-item .uk-countdown-number {
     font-size: 1rem;
 }

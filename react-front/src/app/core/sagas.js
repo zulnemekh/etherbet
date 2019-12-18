@@ -3,7 +3,10 @@ import ServiceFactory from "lib/serviceFactory";
 import * as actions from './actions';
 import * as selectors from './selectors';
 import * as constants from './constants';
+import * as betActions from '../bets/actions';
+import { push } from 'connected-react-router';
 
+import UIKit from 'uikit';
 
 export function* init({payload}) {
   try {
@@ -32,11 +35,14 @@ export function* unlockMetamask() {
 export function* createBet({ payload }) {
   const {accountAddress: from} = yield select(selectors.getProfile)
   try {
+    UIKit.modal("#modal-sections").hide();
     const result = yield call(
       ServiceFactory.call,
       constants.CREATE_BET_URL,
       {params: payload, from}
     );
+    yield put(push('/'))
+    yield put(betActions.getBets());
     yield put(actions.createBetComplete(result));
   } catch (error) {
     yield put(actions.createBetError(error));
