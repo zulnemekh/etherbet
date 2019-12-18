@@ -146,8 +146,9 @@ const withForm =  withFormik({
   //   return errors;
   // },
 
-  handleSubmit: (values, { props: {createBet} }) => {
-    createBet(values);
+  handleSubmit: (values, action) => {
+    action.props.createBet(values);
+    action.resetForm({});
   },
 
   displayName: 'CreateBet',

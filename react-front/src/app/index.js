@@ -10,7 +10,11 @@ const store = configureStore();
 store.runSaga();
 
 window.store = store;
-
+if ( window.ethereum ) {
+  window.ethereum.on('accountsChanged', function (accounts) {
+    store.dispatch(core.actions.init());
+  })
+}
 
 
 class App extends React.Component {

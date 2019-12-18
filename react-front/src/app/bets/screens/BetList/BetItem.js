@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import components from '../../components';
-import moment from 'moment';
+import {convertTime} from '../../helpers';
 
-function convertTime(timestamp){
-  return moment.unix(timestamp).toISOString()
-}
+
 
 const TakeBetModal = components.TakeBetModal;
 const Countdown = components.Countdown;
@@ -15,15 +13,16 @@ const BetItem = ({bet}) => (
       <div className="tokens mr-l50">
         <div className="token-name"> {bet.category} </div>
     
-        <div className="token-body">
-          <TakeBetModal winner={1} bet_id={bet.id} par={bet.par1} />
+        <div className="token-body bet-item">
+          <TakeBetModal parId={1} bet_id={bet.id} par={bet.par1} winner={bet.winner}/>
           <p>VS</p>
-          <TakeBetModal winner={2} bet_id={bet.id} par={bet.par2} />
+          <TakeBetModal parId={2} bet_id={bet.id} par={bet.par2} winner={bet.winner}/>
           <hr/>
           <Countdown time={convertTime(bet.expiryDate)}/>
           <hr/>
           <span className="token-con"> {bet.description} </span>
-          <Link to={`bets/${bet.id}`}>Detail</Link>
+          <hr/>
+          <Link to={`bets/${bet.id}`} className="btn1">More</Link>
         </div>
       </div>
   </div>

@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Countdown = ({time}) => (
-  <div className="uk-grid-small uk-child-width-auto" uk-grid="true" uk-countdown={`date: ${time}`}>
+  <div 
+    className="uk-grid-small uk-child-width-auto uk-flex-center" 
+    uk-grid="true" 
+    uk-countdown={`date: ${time}`}
+    style={{color: "#fff"}}
+  >
     <div>
       <div className="uk-countdown-number uk-countdown-days"></div>
       <div className="uk-countdown-label uk-margin-small uk-text-center uk-visible@s">Days</div>

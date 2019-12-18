@@ -16,17 +16,19 @@ const TakeBetModal = ({
   par,
   bet_id,
   resetForm,
-  winner
+  parId,
+  winner,
 }) => (<>
   <button
     className="left-btn"
+    disabled={winner!='4'}
     onClick={() => {
-      UIKit.modal(`#modal-takebet-${bet_id}-${winner}`).show();
+      UIKit.modal(`#modal-takebet-${bet_id}-${parId}`).show();
       setFieldValue('amount', 0)
     }}>
-    {par}
+    {`${par}${parId == winner ? ' (WINNER)': ''}`}
   </button>
-  <div id={`modal-takebet-${bet_id}-${winner}`} uk-modal="true">
+  <div id={`modal-takebet-${bet_id}-${parId}`} uk-modal="true">
     <div className="uk-modal-dialog">
       <form onSubmit={handleSubmit} className="uk-form-stacked">
         <button className="uk-modal-close-default" type="button" uk-close="true"></button>
@@ -34,8 +36,7 @@ const TakeBetModal = ({
           <h2 className="uk-modal-title">Take Bet for {par}</h2>
         </div>
         <div className="uk-modal-body uk-grid-small" uk-grid="true">
-          {loader ? <span uk-spinner="ratio: 4.5"></span>
-            : <>
+            
               <div className="uk-width-1-2">
                 <label className="uk-form-label" htmlFor="Participant 1">Bet amount</label>
                 <div className="uk-form-controls">
@@ -49,10 +50,11 @@ const TakeBetModal = ({
                     type="number"
                     step="0.00001"
                     min="0"
-                    placeholder="ETH 0.1" />
+                    placeholder="ETH 0.1" 
+                    disabled={loader}/>
                 </div>
               </div>
-            </>}
+            
         </div>
         <div className="uk-modal-footer uk-text-right">
           <button className="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
@@ -67,12 +69,13 @@ const withForm = withFormik({
   enableReinitialize: true,
   mapPropsToValues: (props) => ({
     bet_id: props.bet_id,
-    winner: props.winner,
+    parId: props.parId,
     amount: 0,
   }),
 
-  handleSubmit: (values, { props: { takeBet } }) => {
-    takeBet(values);
+  handleSubmit: (values, action) => {
+    action.props.takeBet(values);
+    // action.resetForm({});
   },
 
   displayName: 'TakeBet',

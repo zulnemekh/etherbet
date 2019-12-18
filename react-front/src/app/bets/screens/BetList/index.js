@@ -10,9 +10,10 @@ class BetList extends Component {
   }
 
   render() {
-    const { bets } = this.props;
+    const { bets, isCreatingBet } = this.props;
 
     return (<div className="tokens-area">
+        {isCreatingBet && <div uk-spinner="true"></div>}
       <div className="uk-child-width-expand@s uk-text-center" uk-grid="true">
         {(bets || []).map(bet => <BetItem key={bet.id} bet={bet}/>)}
       </div>

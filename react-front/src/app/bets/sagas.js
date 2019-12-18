@@ -6,18 +6,22 @@ import * as selectors from './selectors';
 import * as constants from './constants';
 import * as coreSelectors from './../core/selectors';
 import * as helpers from './helpers';
+import {push} from 'connected-react-router';
+import UIKit from 'uikit';
 
 
 export function* createBet(action) {
   const { accountAddress } = yield select(coreSelectors.getProfile);
   const params = {payload: action.payload, from: accountAddress }
   try {
+    
     const result = yield call(
       ServiceFactory.call, 
       constants.CREATE_BET_URL,
       params,
     );
     yield put(actions.createBetComplete(result));
+    yield put(actions.getBets());
   } catch (error) {
     yield put(actions.createBetError(error));
   }
@@ -37,7 +41,8 @@ export function* getBets() {
 
 export function* takeBet({ payload }) {
   const { accountAddress } = yield select(coreSelectors.getProfile);
-  const {bet_id, winner, amount} = payload;
+  const {bet_id, parId, amount} = payload;
+  yield put(push(`/bets/${bet_id}`))
   try {
     const contract = yield call(
       ServiceFactory.call, 
@@ -46,11 +51,18 @@ export function* takeBet({ payload }) {
     );
     const result = contract.methods.takeBet(
       helpers.toHex(bet_id), 
-      helpers.toHex(winner)
+      helpers.toHex(parId)
     ).send({from: accountAddress, value: helpers.toWei(amount)});
 
+    UIKit.modal(`#modal-takebet-${bet_id}-${parId}`).hide();
     const txHash = yield call(helpers.getPromiEvent, result, 'transactionHash');
     const receipt = yield call(helpers.getPromiEvent, result, 'receipt');
+    
+    yield put(actions.getUserBetOf(bet_id));
+    yield put(actions.getUserBetsLength(bet_id));
+    yield put(actions.betUserAmountOf(bet_id));
+    yield put(actions.getTotalAmountOf(bet_id));
+    yield put(actions.betAmountOf(bet_id));
     yield put(actions.takeBetComplete(receipt));
   } catch (error) {
     yield put(actions.takeBetError(error));
@@ -150,7 +162,7 @@ export function* agreeBetWinner({payload: {id, winner}}) {
     let result = contract.methods.agreeBetWinner(id, winner).send({from});
     const txHash = yield call(helpers.getPromiEvent, result, 'transactionHash');
     const receipt = yield call(helpers.getPromiEvent, result, 'receipt');
-    yield put(actions.agreeBetWinnerComplete());
+    yield put(actions.agreeBetWinnerComplete(id));
   } catch (error) {
     yield put(actions.agreeBetWinnerError(error));
   }
@@ -160,6 +172,15 @@ export function* agreeBetWinner({payload: {id, winner}}) {
 
 export function* watchGetBetComplete() {
   const { payload: { id }} = yield take(actions.getBetComplete);
+  yield put(actions.getUserBetOf(id));
+  yield put(actions.getUserBetsLength(id));
+  yield put(actions.betUserAmountOf(id));
+  yield put(actions.getTotalAmountOf(id));
+  yield put(actions.betAmountOf(id));
+}
+export function* watchAgreeBetWinnerComplete() {
+  const { payload: id} = yield take(actions.agreeBetWinnerComplete);
+  yield put(actions.getBet(id));
   yield put(actions.getUserBetOf(id));
   yield put(actions.getUserBetsLength(id));
   yield put(actions.betUserAmountOf(id));
@@ -210,6 +231,7 @@ export default [
   watchGetTotalAmountOf,
   watchBetAmountOf,
   watchAgreeBetWinner,
+  watchAgreeBetWinnerComplete
 /*__EXPORT_WATCHER_SAGA__*/
 ];
 
