@@ -83,20 +83,14 @@ const CreateBet = ({
       <div className="uk-width-1-1">
         <label className="uk-form-label" htmlFor="Category">Category</label>
         <div className="uk-form-controls">
-          <select
+          <input
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.bType}
             name="bType"
-            className="uk-select"
+            className="uk-input"
             id="Category"
-          >
-            <option>UFC</option>
-            <option>Wrestling</option>
-            <option>Boxing</option>
-            <option>BasketBall</option>
-            <option>Chess</option>
-          </select>
+            type="text" placeholder="Category"/>
         </div>
       </div>
 
