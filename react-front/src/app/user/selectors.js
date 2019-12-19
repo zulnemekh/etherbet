@@ -11,4 +11,6 @@ export const makeLoadingSelector = (feature) => {
   return createSelector(getUser, ({ loader }) => loader[feature])
 }
 
+export const getMyBets = createSelector(getUser, a => a.myBets)
+
 /*__ADD_SELECTORS__*/
