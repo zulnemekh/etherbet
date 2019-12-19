@@ -10,12 +10,10 @@ const MainLayout = ({ children, profile, unlock, isCreateBetLoading }) => (<>
     <div className="uk-navbar-left">
       <Link to="/" className="uk-navbar-item uk-logo" style={{ color: "#fff" }}>EtherBet</Link>
     </div>
-    <div className="uk-navbar-left">
-      <Link to="/user/bets" style={{ color: "#fff" }}><button className="btn1"><span>MY BETS </span></button></Link>
-    </div>
     <div className="uk-navbar-center">
       {profile && profile.accountAddress && <CreateBetModal />}
       {isCreateBetLoading && <div uk-spinner="true"></div>}
+      <Link to="/user/bets" style={{ color: "#fff" }}><button className="btn1"><span>MY BETS </span></button></Link>
     </div>
     <div className="uk-navbar-right">
       {profile && profile.accountAddress ?
