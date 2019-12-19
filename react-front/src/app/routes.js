@@ -2,12 +2,13 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import core from './core';
 import bets from './bets';
-
-const MainLayout = core.components.MainLayout
+import user from './user';
 /*__IMPORT_MODULE__*/
+const MainLayout = core.components.MainLayout
 const allRoutes = [
 	...core.routes,
 	...bets.routes,
+	...user.routes,
 /*__IMPORT_MODULE_ROUTES__*/
 ]
 

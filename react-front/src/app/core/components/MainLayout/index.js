@@ -9,6 +9,7 @@ const MainLayout = ({children, profile, unlock, isCreateBetLoading}) => (<>
 
 <div className="uk-navbar-left">
   <Link to="/" className="uk-navbar-item uk-logo" style={{color: "#fff"}}>EtherBet</Link>
+  <Link to="/user/bets" className="uk-navbar-item uk-logo" style={{color: "#fff"}}>mybets</Link>
 </div>
 
 <div className="uk-navbar-center">
