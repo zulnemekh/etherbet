@@ -4,33 +4,34 @@ import enhancers from './enhancers';
 
 import CreateBetModal from '../CreateBetModal';
 
-const MainLayout = ({children, profile, unlock, isCreateBetLoading}) => (<>
-<nav className="uk-navbar-container" uk-navbar="true">
+const MainLayout = ({ children, profile, unlock, isCreateBetLoading }) => (<>
+  <nav className="uk-navbar-container" uk-navbar="true">
 
-<div className="uk-navbar-left">
-  <Link to="/" className="uk-navbar-item uk-logo" style={{color: "#fff"}}>EtherBet</Link>
-  <Link to="/user/bets" className="uk-navbar-item uk-logo" style={{color: "#fff"}}>mybets</Link>
-</div>
+    <div className="uk-navbar-left">
+      <Link to="/" className="uk-navbar-item uk-logo" style={{ color: "#fff" }}>EtherBet</Link>
+    </div>
+    <div className="uk-navbar-left">
+      <Link to="/user/bets" style={{ color: "#fff" }}><button className="btn1"><span>MY BETS </span></button></Link>
+    </div>
+    <div className="uk-navbar-center">
+      {profile && profile.accountAddress && <CreateBetModal />}
+      {isCreateBetLoading && <div uk-spinner="true"></div>}
+    </div>
+    <div className="uk-navbar-right">
+      {profile && profile.accountAddress ?
+        <p style={{ color: "#fff" }}> {profile.accountAddress}</p>
+        :
+        <button onClick={() => unlock()} className="btn1"><span>Login</span></button>
+      }
 
-<div className="uk-navbar-center">
-  {profile && profile.accountAddress && <CreateBetModal />}
-  {isCreateBetLoading && <div uk-spinner="true"></div>}
-</div>
-<div className="uk-navbar-right">
-  {profile && profile.accountAddress ? 
-    <p style={{color: "#fff"}}> { profile.accountAddress }</p>
-  :
-  <button onClick={()=>unlock()} className="btn1"><span>Login</span></button>
-  }
+    </div>
 
-</div>
-
-</nav>
-<div style={{paddingTop: "150px", minHeight: "100vh"}}>
-  <div className="uk-container">
-    {children}
+  </nav>
+  <div style={{ paddingTop: "150px", minHeight: "100vh" }}>
+    <div className="uk-container">
+      {children}
+    </div>
   </div>
-</div>
 
 </>);
 

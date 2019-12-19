@@ -4,10 +4,10 @@ import * as selectors from '../../../selectors';
 import * as constants from '../../../constants';
 
 export const mapStateToProps = state => ({
-
+  bets: selectors.getMyBets(state)
 });
 export const mapDispatchToProps = dispatch => ({
-  getMyBets(){
+  getMyBets() {
     dispatch(actions.getMyBets())
   }
 });

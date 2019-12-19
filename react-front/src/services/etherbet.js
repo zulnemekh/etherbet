@@ -52,6 +52,36 @@ export default class EtherBetService {
 		return bets;
 	}
 
+	async getMyBets({ accountAddress }) {
+		console.log(accountAddress);
+		let bets = [];
+		let betLength = 0;
+		let promises = [];
+		let betDetail = [];
+		betLength = await this.contract.methods.getBetLength().call();
+		for (let i = 0; i < betLength; i++) {
+			betDetail[i] = await this.contract.methods.getUserBetOf(i, accountAddress).call();
+			if (betDetail[i] > 0) {
+				promises.push(this.getBet(i));
+			}
+		}
+
+		bets = await Promise.all(promises);
+		bets = bets.map(bet => ({
+			id: bet["id"],
+			par1: bet[0],
+			par2: bet[1],
+			expiryDate: bet[2],
+			winner: bet[3],
+			isAvailable: bet[4],
+			isPublic: bet[5],
+			category: bet[6],
+			description: bet[7],
+			canDraw: bet[8],
+		}));
+		return bets;
+	}
+
 	async getBet(id) {
 		const bet = await this.contract.methods.bets(id).call();
 		return { id, ...bet }
@@ -75,7 +105,7 @@ export default class EtherBetService {
 	// hen deer heden bet tavigdsan
 	async betAmountOf({ bet_id, par }) {
 		window.contract = this.contract;
-		return await this.contract.methods.betAmountOf(bet_id, par).call(); 
+		return await this.contract.methods.betAmountOf(bet_id, par).call();
 	}
 	/*__ADD_SERVICE_METHOD__*/
 }

@@ -1,4 +1,4 @@
-import {call, put, select, takeEvery} from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import ServiceFactory from "../../lib/serviceFactory";
 import * as actions from './actions';
 import * as selectors from './selectors';
@@ -7,12 +7,11 @@ import * as coreSelectors from './../core/selectors';
 
 export function* getMyBets() {
   const { accountAddress } = yield select(coreSelectors.getProfile);
-  console.log(accountAddress);
   try {
     const result = yield call(
-      ServiceFactory.call, 
+      ServiceFactory.call,
       constants.GET_MY_BETS_URL,
-      {}
+      { accountAddress }
     );
     yield put(actions.getMyBetsComplete(result));
   } catch (error) {
@@ -26,8 +25,8 @@ export function* watchGetMyBets() {
 }
 /*__ADD_WATCHER_SAGA__*/
 export default [
-  
-    watchGetMyBets,
-/*__EXPORT_WATCHER_SAGA__*/
+
+  watchGetMyBets,
+  /*__EXPORT_WATCHER_SAGA__*/
 ];
 
