@@ -22,7 +22,7 @@ const BetItem = ({ bet }) => (
         <hr />
         <span className="token-con"> {bet.description} </span>
         <hr />
-        <Link to={`bets/${bet.id}`} className="btn1">More</Link>
+        <Link to={"/bets/" + bet.id} className="btn1">More</Link>
       </div>
     </div>
   </div>
